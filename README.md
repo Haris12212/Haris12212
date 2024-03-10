@@ -1,19 +1,66 @@
-[16:38:27][jomini_game_setup.cpp:352]: game_hash_long: 09722f1852f1d57dd2ebfec5739693d4b6fc6a76
-[16:38:27][jomini_game_setup.cpp:353]: game_hash_short: 09722f185
-[16:38:27][jomini_game_setup.cpp:354]: game_branch: release/1.10.2
-[16:38:27][jomini_game_setup.cpp:355]: game_timestamp: 2023-09-08 11:41:18 +0200
+******************************************************************************
+*   Cartoonifier, for Desktop or Android.
+******************************************************************************
+*   by Shervin Emami, 5th Dec 2012
+*   http://shervinemami.info/openCV.html
+******************************************************************************
+*   Ch1 of the book "Mastering OpenCV with Practical Computer Vision Projects"
+*   Copyright Packt Publishing 2012.
+*   http://www.packtpub.com/cool-projects-with-opencv/book
+******************************************************************************
 
-[16:38:27][jomini_game_setup.cpp:352]: jomini_hash_long: d4dceaeda5d994b1b388777fc8f6798c310b03c3
-[16:38:27][jomini_game_setup.cpp:353]: jomini_hash_short: d4dceaeda5
-[16:38:27][jomini_game_setup.cpp:354]: jomini_branch: titus/release/1.10.1
-[16:38:27][jomini_game_setup.cpp:355]: jomini_timestamp: 2023-09-04 10:48:16 +0200
+This folder contains 2 Cartoonifier projects, performing the same task:
+"Cartoonifier_Desktop": A desktop program (works on Windows, Mac, Linux, etc).
+"Cartoonifier_Android": An Android app (requires Android 3.0 SDK or higher, and an Android 2.2 device or higher).
 
-[16:38:27][jomini_game_setup.cpp:352]: clausewitz_hash_long: d4dceaeda5d994b1b388777fc8f6798c310b03c3
-[16:38:27][jomini_game_setup.cpp:353]: clausewitz_hash_short: d4dceaeda5
-[16:38:27][jomini_game_setup.cpp:354]: clausewitz_branch: titus/release/1.10.1
-[16:38:27][jomini_game_setup.cpp:355]: clausewitz_timestamp: 2023-09-04 10:48:16 +0200
+Cartoonifier_Android is a GUI wrapper, so it accesses some of the same C/C++ files in the Cartoonifier_Desktop folder:
+    "cartoon.cpp" & "cartoon.h": all of the Cartoonifier image processing.
+    "ImageUtils_v0.7.cpp" & "ImageUtils.h": useful functions for debugging OpenCV code.
 
-[16:38:27][jomini_game_setup.cpp:352]: external_libs_hash_long: 2c5414c5554ed06369407123c5b5345937c42758
-[16:38:27][jomini_game_setup.cpp:353]: external_libs_hash_short: 2c5414c555
-[16:38:27][jomini_game_setup.cpp:354]: external_libs_branch: develop
-[16:38:27][jomini_game_setup.cpp:355]: external_libs_timestamp: 2023-09-05 11:45:31 +0000
+Each project has code for its user interface and the project files in its own folder:
+
+"Cartoonifier_Desktop" just uses the file "main_desktop.cpp" for its OpenCV user interface on a desktop.
+It includes a CMake project file to allow building with different compilers & versions for Windows, Mac, Linux, etc.
+
+"Cartoonifier_Android" has an Android folder tree for its Android user interface, including:
+    Java files in the "src" folder, 
+    C/C++ NDK files in the "jni" folder,
+    app resources in the "res" folder.
+It includes an Eclipse project, that you can use for Android cross-development on Windows, Mac & Linux.
+
+
+----------------------------------------------------------
+Building the Cartoonifier_Desktop project using CMake from the command-line:
+----------------------------------------------------------
+Linux:
+    export OpenCV_DIR="~/OpenCV/build"
+    mkdir build
+    cd build
+    cmake -D OpenCV_DIR=$OpenCV_DIR ..
+    make 
+
+MacOSX (Xcode):
+    export OpenCV_DIR="~/OpenCV/build"
+    mkdir build
+    cd build
+    cmake -G Xcode -D OpenCV_DIR=$OpenCV_DIR ..
+    open Cartoonifier_Desktop.xcodeproj
+
+Windows (MS Visual Studio):
+    set OpenCV_DIR="C:\OpenCV\build"
+    mkdir build
+    cd build
+    cmake -G "Visual Studio 9 2008" -D OpenCV_DIR=%OpenCV_DIR% ..
+    start Cartoonifier_Desktop.sln 
+
+    
+----------------------------------------------------------
+Running the project:
+----------------------------------------------------------
+Just execute "Cartoonifier_Desktop".
+
+
+----------------------------------------------------------
+Building & Running the Cartoonifier_Android project:
+----------------------------------------------------------
+Follow the steps recommended in Chapter 1 of the book.
